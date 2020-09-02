@@ -4,8 +4,8 @@ package willy.exceptions;
  * Handles the errors that may arise in the process of using the bot.
  */
 public class WillyException extends Exception {
-    String style = "\t______________________________________________________________\n";
-    String error;
+    private final String style = "\t______________________________________________________________\n";
+    private final String error;
 
     public WillyException(String errorMessage) {
         super(errorMessage);

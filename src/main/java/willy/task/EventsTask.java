@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * A type of Task that spans over a period.
  */
 public class EventsTask extends Task {
-    public String stringPeriod;
-    public LocalDateTime period;
+    private String stringPeriod;
+    private LocalDateTime period;
 
     public EventsTask(String period, String task, TaskSymbol taskType) {
         super(task, taskType);
@@ -17,6 +17,16 @@ public class EventsTask extends Task {
                 DateTimeFormatter.
                         ofPattern("dd/MM/yyyy HH:mm"));
     }
+
+    public String getStringPeriod() {
+        return stringPeriod;
+    }
+
+    public LocalDateTime getPeriod() {
+        return period;
+    }
+
+
 
     @Override
     public String toString() {

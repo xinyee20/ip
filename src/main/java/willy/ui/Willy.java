@@ -31,12 +31,12 @@ public class Willy extends Application {
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
             + "   \\____/     \\____/ ILLY ~(^-^)~\n";
-    public static String introGUI = " __       ___        __\n"
-            + " \\  \\    /    \\     /  /\n"
-            + "  \\  \\  /  /\\  \\  /  /\n"
-            + "   \\  \\/  /  \\  \\/  /\n"
-            + "    \\___/     \\__/ ILLY ~(^-^)~\n" +
-            "    Your personal life secretary\n";
+    public static String introGUI = "\t __       ___        __\n"
+            + "\t \\  \\    /    \\     /  /\n"
+            + "\t  \\  \\  /  /\\  \\  /  /\n"
+            + "\t   \\  \\/  /  \\  \\/  /\n"
+            + "\t    \\___/     \\__/ ILLY ~(^-^)~\n" +
+            "\t    Your personal life secretary\n";
     public boolean isOnJavaFX;
 
     public Willy() {
@@ -111,7 +111,7 @@ public class Willy extends Application {
         hbox.setPadding(new Insets(10, 20, 10, 20));
         hbox.getChildren().addAll(inputField, enterButton, clearButton);
         VBox vbox = new VBox(); // Positions components in a vertical column
-        vbox.getChildren().addAll(willy, hbox, changingCommands);
+        vbox.getChildren().addAll(willy, changingCommands, hbox);
 //        vbox.setAlignment(Pos.CENTER);
 
         StackPane layout = new StackPane();

@@ -4,18 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getTask() {
     }
-    @org.junit.jupiter.api.Test
+    @Test
     void setTaskDone() {
     }
-    @org.junit.jupiter.api.Test
+    @Test
     void getStatusIcon() {
     }
 }

@@ -1,7 +1,6 @@
 package willy.task;
 
 import willy.store.TaskStore;
-import willy.task.Task;
 import willy.ui.Willy;
 
 import java.util.ArrayList;
@@ -50,109 +49,117 @@ public class TaskList {
 
     public void removeTask(int taskNum) {
         int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        listOfTasks.remove(i);
-        storage.updateStorage(listOfTasks);
-        System.out.println(Willy.style +
-                "\tOkai here is the task you just deleted:\n" +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() +
-                " task(s) left ~\n" +
-                Willy.style);
+        try {
+            Task task = listOfTasks.get(i);
+            listOfTasks.remove(i);
+            storage.updateStorage(listOfTasks);
+            System.out.println(Willy.style +
+                    "\tOkai here is the task you just deleted:\n" +
+                    "\t  " + task + "\n" +
+                    "\tNow you have " + listOfTasks.size() +
+                    " task(s) left ~\n" +
+                    Willy.style);
+        } catch (Exception e) {
+            System.out.println("item does not exist");
+        }
     }
 
     public String javaFXRemoveTask(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        listOfTasks.remove(i);
-        storage.updateStorage(listOfTasks);
-        return Willy.style +
-                "\tOkai here is the task you just deleted:\n" +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() +
-                " task(s) left ~\n" +
-                Willy.style;
-    }
-
-    // Reads through all the tasks in the list
-    public void readList() {
-        System.out.println(Willy.style);
-        System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
-        for (int i = 0; i < listOfTasks.size(); i++) {
+        try {
+            int i = taskNum - 1;
             Task task = listOfTasks.get(i);
-            System.out.println("\t" + (i + 1) + ". " + task);
+            listOfTasks.remove(i);
+            storage.updateStorage(listOfTasks);
+            return Willy.style +
+                    "\tOkai here is the task you just deleted:\n" +
+                    "\t  " + task + "\n" +
+                    "\tNow you have " + listOfTasks.size() +
+                    " task(s) left ~\n" +
+                    Willy.style;
+        }catch (Exception e) {
+            return "item does not exist";
         }
-        System.out.println(Willy.style);
     }
 
-    public String javaKFReadList() {
-        String list = Willy.style +
-                "\tHere are the tasks in your list to jolt ur memory:>\n";
-        for (int i = 0; i < listOfTasks.size(); i++) {
+        // Reads through all the tasks in the list
+        public void readList () {
+            System.out.println(Willy.style);
+            System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task task = listOfTasks.get(i);
+                System.out.println("\t" + (i + 1) + ". " + task);
+            }
+            System.out.println(Willy.style);
+        }
+
+        public String javaKFReadList () {
+            String list = Willy.style +
+                    "\tHere are the tasks in your list to jolt ur memory:>\n";
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task task = listOfTasks.get(i);
+                list = list + "\t" + (i + 1) + ". " + task + "\n";
+            }
+            list = list + Willy.style;
+            return list;
+        }
+
+        // Update Tasks to be done
+        public void setTaskDone ( int taskNum){
+            int i = taskNum - 1;
             Task task = listOfTasks.get(i);
-            list = list + "\t" + (i + 1) + ". " + task + "\n";
+            task.setTaskDone(true);
+            storage.updateStorage(listOfTasks);
+            System.out.println(Willy.style);
+            System.out.println("\tNiceee I've marked this task as done!");
+            System.out.println("\t   " + task);
+            System.out.println(Willy.style);
         }
-        list = list + Willy.style;
-        return list;
-    }
 
-    // Update Tasks to be done
-    public void setTaskDone(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        task.setTaskDone(true);
-        storage.updateStorage(listOfTasks);
-        System.out.println(Willy.style);
-        System.out.println("\tNiceee I've marked this task as done!");
-        System.out.println("\t   " + task);
-        System.out.println(Willy.style);
-    }
+        public String javaFXSetTaskDone ( int taskNum){
+            int i = taskNum - 1;
+            Task task = listOfTasks.get(i);
+            task.setTaskDone(true);
+            storage.updateStorage(listOfTasks);
+            return Willy.style + "\n" +
+                    "\tNiceee I've marked this task as done!" + "\n" +
+                    "\t   " + task + "\n" +
+                    Willy.style + "\n";
+        }
 
-    public String javaFXSetTaskDone(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        task.setTaskDone(true);
-        storage.updateStorage(listOfTasks);
-        return Willy.style + "\n" +
-        "\tNiceee I've marked this task as done!" + "\n" +
-        "\t   " + task + "\n" +
-        Willy.style + "\n";
-    }
-
-    public void findTask(String keyword) {
-        ArrayList<Task> keyList = new ArrayList<>();
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            Task tempTask = listOfTasks.get(i);
-            if (tempTask.task.contains(keyword)) {
-                keyList.add(tempTask);
+        public void findTask (String keyword){
+            ArrayList<Task> keyList = new ArrayList<>();
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task tempTask = listOfTasks.get(i);
+                if (tempTask.getTask().contains(keyword)) {
+                    keyList.add(tempTask);
+                }
             }
-        }
 
-        System.out.println(Willy.style);
-        System.out.println("\t Here are the matching tasks in your list:");
-        for (int i = 0; i < keyList.size(); i++) {
-            Task task = keyList.get(i);
-            System.out.println("\t  " + (i + 1) + "." + task);
-        }
-        System.out.println(Willy.style);
-    }
-
-    public String javaFXFindTask(String keyword) {
-        ArrayList<Task> keyList = new ArrayList<>();
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            Task tempTask = listOfTasks.get(i);
-            if (tempTask.task.contains(keyword)) {
-                keyList.add(tempTask);
+            System.out.println(Willy.style);
+            System.out.println("\t Here are the matching tasks in your list:");
+            for (int i = 0; i < keyList.size(); i++) {
+                Task task = keyList.get(i);
+                System.out.println("\t  " + (i + 1) + "." + task);
             }
+            System.out.println(Willy.style);
         }
 
-        String filteredList = Willy.style + "\n" +
-        "\t Here are the matching tasks in your list:" + "\n";
-        for (int i = 0; i < keyList.size(); i++) {
-            Task task = keyList.get(i);
-            filteredList = filteredList + "\t  " + (i + 1) + "." + task + "\n";
+        public String javaFXFindTask (String keyword){
+            ArrayList<Task> keyList = new ArrayList<>();
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task tempTask = listOfTasks.get(i);
+                if (tempTask.getTask().contains(keyword)) {
+                    keyList.add(tempTask);
+                }
+            }
+
+            String filteredList = Willy.style + "\n" +
+                    "\t Here are the matching tasks in your list:" + "\n";
+            for (int i = 0; i < keyList.size(); i++) {
+                Task task = keyList.get(i);
+                filteredList = filteredList + "\t  " + (i + 1) + "." + task + "\n";
+            }
+            filteredList = filteredList + Willy.style;
+            return filteredList;
         }
-        filteredList = filteredList + Willy.style;
-        return filteredList;
     }
-}

@@ -5,9 +5,9 @@ package willy.task;
  * Status of task to be marked done or undone.
  */
 public class Task {
-    public boolean done;
-    public String task;
-    public TaskSymbol taskType;
+    private boolean done;
+    private String task;
+    private TaskSymbol taskType;
 
     public Task(String task, TaskSymbol taskType) {
         this.task = task;
@@ -17,6 +17,10 @@ public class Task {
 
     public String getTask() {
         return task;
+    }
+
+    public TaskSymbol getTaskType() {
+        return taskType;
     }
 
     public void setTaskDone(boolean boo) {

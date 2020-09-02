@@ -5,11 +5,15 @@ import willy.task.*;
 import willy.ui.Greet;
 
 public class Parser {
-    TaskList list;
+    private TaskList list;
     private static String lastGreeting = "bye";
 
     public Parser(TaskList list) {
         this.list = list;
+    }
+
+    public TaskList getList() {
+        return list;
     }
 
     public void parse(String message) {
